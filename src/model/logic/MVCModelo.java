@@ -14,7 +14,7 @@ public class MVCModelo {
 	private IArregloDinamico datos;
 	
 	/**
-	 * Constructor del modelo del mundo con tamaño predefinido
+	 * Constructor del modelo del mundo con capacidad predefinida
 	 */
 	public MVCModelo()
 	{
@@ -22,12 +22,12 @@ public class MVCModelo {
 	}
 	
 	/**
-	 * Constructor del modelo del mundo con tamaño dado
+	 * Constructor del modelo del mundo con capacidad dada
 	 * @param tamano
 	 */
-	public MVCModelo(int tamano)
+	public MVCModelo(int capacidad)
 	{
-		datos = new ArregloDinamico(tamano);
+		datos = new ArregloDinamico(capacidad);
 	}
 	
 	/**
@@ -39,15 +39,12 @@ public class MVCModelo {
 		return datos.darTamano();
 	}
 
-
 	/**
 	 * Requerimiento de agregar dato
 	 * @param dato
 	 */
-	
 	public void agregar(String dato)
-	{
-		
+	{	
 		datos.agregar(dato);
 	}
 	

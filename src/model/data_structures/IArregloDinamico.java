@@ -3,7 +3,13 @@ package model.data_structures;
 public interface IArregloDinamico {
 
 	/**
-	 * Retornar el numero de elementos en el arreglo
+	 * Retornar el numero de elementos maximo en el arreglo
+	 * @return
+	 */
+	int darCapacidad( );
+
+	/**
+	 * Retornar el numero de elementos presentes en el arreglo
 	 * @return
 	 */
 	int darTamano( );

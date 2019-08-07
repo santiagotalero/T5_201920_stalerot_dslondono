@@ -13,7 +13,7 @@ public class ArregloDinamico implements IArregloDinamico {
 		 */
         private int tamanoMax;
 		/**
-		 * Numero de elementos en el arreglo (de forma compacta desde la posicion 0)
+		 * Numero de elementos presentes en el arreglo (de forma compacta desde la posicion 0)
 		 */
         private int tamanoAct;
         /**
@@ -49,8 +49,11 @@ public class ArregloDinamico implements IArregloDinamico {
                tamanoAct++;
        }
 
+		public int darCapacidad() {
+			return tamanoMax;
+		}
+
 		public int darTamano() {
-			// TODO implementar
 			return tamanoAct;
 		}
 
@@ -70,4 +73,5 @@ public class ArregloDinamico implements IArregloDinamico {
 			// Recomendacion: Usar el criterio de comparacion natural (metodo compareTo()) definido en Strings.
 			return null;
 		}
+
 }
