@@ -2,6 +2,7 @@ package model.data_structures;
 
 import java.util.Iterator;
 
+
 public class HashTableLinearProbing<Key, Value> implements ISymbolTable<Key, Value>
 {
 	// Constantes
@@ -234,14 +235,14 @@ public class HashTableLinearProbing<Key, Value> implements ISymbolTable<Key, Val
 	}
 
 	@Override
-	public Iterator<Key> keys() {
-		// TODO Auto-generated method stub
-		return null;
+	public Iterable<Key> keys() {
+		Queue<Key> queue = new Queue<Key>();
+		for(int i = 0; i < M; i++)
+		{
+			if(keys[i] != null)
+				queue.enqueue(keys[i]);
+		}
+		return (Iterable<Key>) queue;
 	}
 
-	@Override
-	public Iterator iterator() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }

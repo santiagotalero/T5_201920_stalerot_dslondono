@@ -8,7 +8,7 @@ import java.util.Iterator;
  * @param <Key> Llave con la que se identificarán y buscarán las tuplas de la tabla.
  * @param <Value> Valor a almacenar con la correspondiente llave en la tabla. 
  */
-public interface ISymbolTable<Key, Value> extends Iterable
+public interface ISymbolTable<Key, Value>
 {
 	// Métodos
 	
@@ -51,5 +51,5 @@ public interface ISymbolTable<Key, Value> extends Iterable
 	/**
 	 * @return Todas las llaves en la tabla. 
 	 */
-	public Iterator<Key> keys();
+	public Iterable<Key> keys();
 }

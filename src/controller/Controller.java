@@ -1,8 +1,12 @@
 package controller;
 
+import java.io.IOException;
+import java.util.Iterator;
 import java.util.Scanner;
 
+import model.data_structures.Queue;
 import model.logic.MVCModelo;
+import model.logic.TravelTime;
 import view.MVCView;
 
 public class Controller {
@@ -29,6 +33,7 @@ public class Controller {
 		boolean fin = false;
 		String dato = "";
 		String respuesta = "";
+		
 
 		while( !fin ){
 			view.printMenu();
@@ -36,58 +41,69 @@ public class Controller {
 			int option = lector.nextInt();
 			switch(option){
 				case 1:
-					System.out.println("--------- \nCrear Arreglo \nDar capacidad inicial del arreglo: ");
-				    int capacidad = lector.nextInt();
-				    modelo = new MVCModelo(capacidad); 
-					System.out.println("Arreglo Dinamico creado");
-					System.out.println("Numero actual de elementos " + modelo.darTamano() + "\n---------");						
+					try {
+						modelo.cargarArchivos();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
 					break;
 
 				case 2:
-					System.out.println("--------- \nDar cadena (simple) a ingresar: ");
-					dato = lector.next();
-					modelo.agregar(dato);
-					System.out.println("Dato agregado");
-					System.out.println("Numero actual de elementos " + modelo.darTamano() + "\n---------");						
-					break;
-
-				case 3:
-					System.out.println("--------- \nDar cadena (simple) a buscar: ");
-					dato = lector.next();
-					respuesta = modelo.buscar(dato);
-					if ( respuesta != null)
-					{
-						System.out.println("Dato encontrado: "+ respuesta);
-					}
-					else
-					{
-						System.out.println("Dato NO encontrado");
-					}
-					System.out.println("Numero actual de elementos " + modelo.darTamano() + "\n---------");						
-					break;
-
-				case 4:
-					System.out.println("--------- \nDar cadena (simple) a eliminar: ");
-					dato = lector.next();
-					respuesta = modelo.eliminar(dato);
-					if ( respuesta != null)
-					{
-						System.out.println("Dato eliminado "+ respuesta);
-					}
-					else
-					{
-						System.out.println("Dato NO eliminado");							
-					}
-					System.out.println("Numero actual de elementos " + modelo.darTamano() + "\n---------");						
-					break;
-
-				case 5: 
-					System.out.println("--------- \nContenido del Arreglo: ");
-					view.printModelo(modelo);
-					System.out.println("Numero actual de elementos " + modelo.darTamano() + "\n---------");						
-					break;	
 					
-				case 6: 
+					System.out.println("Ingrese un trimestre.");
+					int trimestre=lector.nextInt();
+					
+					System.out.println("Ingrese una zona de origen");
+					int zO= lector.nextInt();
+					System.out.println("Ingrese una zona de destino");
+					int zD= lector.nextInt();
+					
+					Queue viajes= modelo.req1(trimestre, zO, zD);
+
+					if(viajes!=null){
+
+
+						Iterator iter= viajes.iterator();
+
+						while(iter.hasNext())
+						{
+							TravelTime actual= (TravelTime) iter.next();
+							System.out.println("\n"+actual.getTrimestre()+","+actual.getSourceID()+","+actual.getDstID()+","+ actual.getDow()+","+actual.getMeanTravelTime()+"\n");
+						}
+					}
+					break;
+				case 3:
+					System.out.println("Ingrese un trimestre.");
+					trimestre=lector.nextInt();
+					
+					System.out.println("Ingrese una zona de origen");
+					zO= lector.nextInt();
+					System.out.println("Ingrese una zona de destino");
+					zD= lector.nextInt();
+					
+					viajes= modelo.req2(trimestre, zO, zD);
+					
+					if(viajes!=null){
+						
+					
+					Iterator iter= viajes.iterator();
+					
+					while(iter.hasNext())
+					{
+						TravelTime actual= (TravelTime) iter.next();
+						System.out.println("\n"+ actual.getTrimestre()+","+actual.getSourceID()+","+actual.getDstID()+","+ actual.getDow()+","+actual.getMeanTravelTime()+"\n");
+					}
+					}
+					break;
+				case 4: 
+					long[] tiempos= modelo.req3();
+					
+					System.out.println("Linear prob:" + tiempos[0]+ ", separate chaining: "+ tiempos[1]);
+					
+					break;
+				case 5: 
 					System.out.println("--------- \n Hasta pronto !! \n---------"); 
 					lector.close();
 					fin = true;

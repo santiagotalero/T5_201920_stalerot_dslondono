@@ -3,6 +3,7 @@ package model.data_structures;
 import java.util.Iterator;
 
 
+
 public class HashTableSeparateChaining <Key, Value> implements ISymbolTable<Key, Value>
 {
 	//------------------------------------
@@ -180,7 +181,7 @@ public class HashTableSeparateChaining <Key, Value> implements ISymbolTable<Key,
 			}
 
 			if(!isPrime)
-				primo= primo+2;
+				primo= primo+1;
 			else
 				encontrado=true;
 
@@ -487,15 +488,23 @@ public class HashTableSeparateChaining <Key, Value> implements ISymbolTable<Key,
 	}
 
 	@Override
-	public Iterator iterator() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	public Iterable<Key> keys() {
+		Queue<Key> queue = new Queue<Key>();
+		for(int i = 0; i < numCasillas; i++)
+		{
+			if(elementos[i] != null)
+			{
+				Key[] keys = elementos[i].darLlaves();
+				for(Key j: keys)
+				{
+					if(j !=null)
+						queue.enqueue(j);
 
-	@Override
-	public Iterator<Key> keys() {
-		// TODO Auto-generated method stub
-		return null;
+				}
+
+			}
+		}
+		return (Iterable<Key>) queue;
 	}
 
 
