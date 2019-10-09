@@ -94,7 +94,17 @@ public class MVCModelo {
 		catch (FileNotFoundException e) 
 		{
 			e.printStackTrace();
-		} 
+		}
+		finally{
+			if (reader != null) {
+				try {
+					reader.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+
+		}
 		try 
 		{
 			reader = new CSVReader(new FileReader("./data/bogota-cadastral-2018-2-WeeklyAggregate.csv"));
@@ -106,7 +116,7 @@ public class MVCModelo {
 			cola2= new Queue<TravelTime>();
 			for(String[] nextLine : reader)
 			{
-				TravelTime actual= new TravelTime(1, Integer.parseInt(nextLine[0]),Integer.parseInt(nextLine[1]),Integer.parseInt(nextLine[2]),Double.parseDouble(nextLine[3]),Double.parseDouble(nextLine[4]));
+				TravelTime actual= new TravelTime(2, Integer.parseInt(nextLine[0]),Integer.parseInt(nextLine[1]),Integer.parseInt(nextLine[2]),Double.parseDouble(nextLine[3]),Double.parseDouble(nextLine[4]));
 				cola2.enqueue(actual);
 			}
 			tamano += cola2.size();
@@ -141,6 +151,16 @@ public class MVCModelo {
 		{
 			e.printStackTrace();
 		} 
+		finally{
+			if (reader != null) {
+				try {
+					reader.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+
+		}
 		try 
 		{
 			reader = new CSVReader(new FileReader("./data/bogota-cadastral-2018-3-WeeklyAggregate.csv"));
@@ -152,7 +172,7 @@ public class MVCModelo {
 			cola3= new Queue<TravelTime>();
 			for(String[] nextLine : reader)
 			{
-				TravelTime actual= new TravelTime(1, Integer.parseInt(nextLine[0]),Integer.parseInt(nextLine[1]),Integer.parseInt(nextLine[2]),Double.parseDouble(nextLine[3]),Double.parseDouble(nextLine[4]));
+				TravelTime actual= new TravelTime(3, Integer.parseInt(nextLine[0]),Integer.parseInt(nextLine[1]),Integer.parseInt(nextLine[2]),Double.parseDouble(nextLine[3]),Double.parseDouble(nextLine[4]));
 				cola3.enqueue(actual);
 			}
 			tamano += cola3.size();
@@ -185,7 +205,17 @@ public class MVCModelo {
 		catch (FileNotFoundException e) 
 		{
 			e.printStackTrace();
-		} 
+		}
+		finally{
+			if (reader != null) {
+				try {
+					reader.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+
+		}
 		try 
 		{
 			reader = new CSVReader(new FileReader("./data/bogota-cadastral-2018-4-WeeklyAggregate.csv"));
@@ -197,7 +227,7 @@ public class MVCModelo {
 			cola4= new Queue<TravelTime>();
 			for(String[] nextLine : reader)
 			{
-				TravelTime actual= new TravelTime(1, Integer.parseInt(nextLine[0]),Integer.parseInt(nextLine[1]),Integer.parseInt(nextLine[2]),Double.parseDouble(nextLine[3]),Double.parseDouble(nextLine[4]));
+				TravelTime actual= new TravelTime(4, Integer.parseInt(nextLine[0]),Integer.parseInt(nextLine[1]),Integer.parseInt(nextLine[2]),Double.parseDouble(nextLine[3]),Double.parseDouble(nextLine[4]));
 				cola4.enqueue(actual);
 			}
 			tamano += cola4.size();
@@ -372,17 +402,19 @@ public class MVCModelo {
 		}
 		
 		
-		
+		int i=0;
 		
 		Iterator iter=colas.iterator();
 		while(iter.hasNext())
 		{
+			i++;
 			Queue colaFinalActual= (Queue) iter.next();
 			TravelTime viajeReferencia= (TravelTime) colaFinalActual.bottom();
 			String keyReferencia=viajeReferencia.getTrimestre()+"-"+viajeReferencia.getSourceID()+"-"+viajeReferencia.getDstID();
 			linearProb.put(keyReferencia, colaFinalActual );
 			separateChain.put(keyReferencia, colaFinalActual);
 		}
+		System.out.println(i);
 	}
 	
 	
